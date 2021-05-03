@@ -1,9 +1,9 @@
 {
-  "admin-example.navigation.label-group": "Example admins",
-  "admin-example.navigation.label-details": "Example details",
-  "admin-example.navigation.label-table": "Example table",
-  "admin-example.navigation.search.kws": "test, mock, fake",
-  "admin-example.navigation.details.search.kws": "details, mock, test, hello",
-  "admin-example.navigation.table.search.kws": "table, mock, test, bye",
-  "admin-example.hello-world": "Example Admin"
+  "order-monitor.navigation.label-group": "Example admins",
+  "order-monitor.navigation.label-details": "Example details",
+  "order-monitor.navigation.label-table": "Example table",
+  "order-monitor.navigation.search.kws": "test, mock, fake",
+  "order-monitor.navigation.details.search.kws": "details, mock, test, hello",
+  "order-monitor.navigation.table.search.kws": "table, mock, test, bye",
+  "order-monitor.hello-world": "Example Admin"
 }

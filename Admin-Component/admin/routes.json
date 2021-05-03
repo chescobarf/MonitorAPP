@@ -1,10 +1,10 @@
 {
   "admin.app.example": {
-    "component": "AdminExample",
-    "path": "/admin/app/example"
+    "component": "OrderMonitor",
+    "path": "/admin/app/order-monitor"
   },
   "admin.app.example-detail": {
-    "component": "AdminExampleDetail",
-    "path": "/admin/app/example/:id"
+    "component": "OrderMonitorDetail",
+    "path": "/admin/app/order-monitor/:id"
   }
 }
