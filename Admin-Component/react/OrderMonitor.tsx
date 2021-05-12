@@ -6,7 +6,7 @@ import UsersTable from './UsersTable'
 
 import './styles.global.css'
 
-const AdminExample: FC = () => {
+const OrderMonitor: FC = () => {
   return (
     <Layout
       pageHeader={
@@ -22,4 +22,4 @@ const AdminExample: FC = () => {
   )
 }
 
-export default AdminExample
+export default OrderMonitor

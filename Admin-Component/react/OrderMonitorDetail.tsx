@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl'
 
 import './styles.global.css'
 
-const AdminExampleDetail: FC = () => {
+const OrderMonitorDetail: FC = () => {
   return <FormattedMessage id="admin-example.hello-world" />
 }
 
-export default AdminExampleDetail
+export default OrderMonitorDetail

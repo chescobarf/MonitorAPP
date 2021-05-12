@@ -6,13 +6,8 @@
   "subSectionItems": [
     {
       "labelId": "order-monitor.navigation.label-details",
-      "path": "/analytics/example",
+      "path": "/analytics/order-monitor",
       "searchKeyWordsHelpers": "order-monitor.navigation.details.search.kws"
-    },
-    {
-      "labelId": "order-monitor.navigation.label-table",
-      "path": "/admin/example",
-      "searchKeyWordsHelpers": "order-monitor.navigation.table.search.kws"
     }
   ]
 }
