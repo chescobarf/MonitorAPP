@@ -2,9 +2,5 @@
   "admin.app.order-monitor": {
     "component": "OrderMonitor",
     "path": "/admin/app/order-monitor"
-  },
-  "admin.app.order-monitor-details": {
-    "component": "OrderMonitorDetail",
-    "path": "/admin/app/order-monitor/:id"
   }
 }

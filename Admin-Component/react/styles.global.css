@@ -6,3 +6,37 @@ body,
 .render-provider {
   height: 100%;
 }
+.statusContainer{
+  width: fit-content;
+}
+.statusCard{
+  padding: '80px';
+  color: '#585959';
+  background: '#fafafa';
+}
+.statusTitle{
+  	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.statusNumbers{
+  text-align: center;
+}
+.statusNotificate{
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+.statusEmails .container{
+	margin-top: 0.67em;
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	max-width: 100%;
+}
+.emailsTag{
+	margin: 0 7px 7px 0px;
+}
+.statusNotificate .container{
+	display: flex;
+    justify-content: center;
+}

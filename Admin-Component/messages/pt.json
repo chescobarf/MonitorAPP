@@ -1,9 +1,6 @@
 {
-  "order-monitor.navigation.label-group": "Admins de exemplo",
-  "order-monitor.navigation.label-details": "Exemplo de detalhes",
-  "order-monitor.navigation.label-table": "Exemplo de tabela",
-  "order-monitor.navigation.search.kws": "teste, mock, fake",
-  "order-monitor.navigation.details.search.kws": "detalhe, mock, test, oi",
-  "order-monitor.navigation.table.search.kws": "tabela, mock, test, tchau",
-  "order-monitor.hello-world": "Admin de exemplo"
+  "order-monitor.navigation.label-group": "Monitor de órdenes",
+  "order-monitor.navigation.search.kws": "order, monitor, ordenes",
+  "order-monitor.hello-world": "Monitor de Órdenes",
+  "order-monitor.notification-actually": "Actualmente tienes la notificacion en:"
 }

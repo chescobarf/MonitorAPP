@@ -1,9 +1,7 @@
 {
   "order-monitor.navigation.label-group": "Monitor de órdenes",
-  "order-monitor.navigation.label-details": "Monitor de órdenes",
-  "order-monitor.navigation.label-table": "Ejemplo de tabela",
   "order-monitor.navigation.search.kws": "order, monitor, ordenes",
-  "order-monitor.navigation.details.search.kws": "order, monitor, ordenes",
-  "order-monitor.navigation.table.search.kws": "order, monitor, ordenes",
-  "order-monitor.hello-world": "Monitor de Órdenes"
+  "order-monitor.hello-world": "Monitor de Órdenes",
+  "order-monitor.notification-actually": "Actualmente tienes la notificacion en:",
+  "order-monitor.orders": " Órdenes"
 }

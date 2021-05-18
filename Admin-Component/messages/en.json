@@ -1,9 +1,7 @@
 {
-  "order-monitor.navigation.label-group": "Example admins",
-  "order-monitor.navigation.label-details": "Example details",
-  "order-monitor.navigation.label-table": "Example table",
-  "order-monitor.navigation.search.kws": "test, mock, fake",
-  "order-monitor.navigation.details.search.kws": "details, mock, test, hello",
-  "order-monitor.navigation.table.search.kws": "table, mock, test, bye",
-  "order-monitor.hello-world": "Example Admin"
+  "order-monitor.navigation.label-group": "Order Monitor",
+  "order-monitor.navigation.search.kws": "order, monitor,order monitor",
+  "order-monitor.hello-world": "Order Monitor",
+  "order-monitor.notification-actually": "You currently have the notification in:",
+  "order-monitor.orders": " Orders"
 }
