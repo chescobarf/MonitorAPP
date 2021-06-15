@@ -22,12 +22,9 @@ body,
 .statusNumbers{
   text-align: center;
 }
-.statusNotificate{
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-}
 .statusEmails .container{
 	margin-top: 0.67em;
+	margin-bottom: 0.8em;
 	display: flex;
 	gap: 10px;
 	width: 100%;
@@ -36,7 +33,17 @@ body,
 .emailsTag{
 	margin: 0 7px 7px 0px;
 }
+.statusNotificate{
+	margin-top: 0.67em;
+    margin-bottom: 2em;
+}
 .statusNotificate .container{
 	display: flex;
-    justify-content: center;
+    justify-content: space-between;
+}
+.gridOrders{
+  display: grid;
+  width: auto;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem;
 }
