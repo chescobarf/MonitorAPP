@@ -6,8 +6,20 @@
   "maxReplicas": 4,
   "workers": 1,
   "routes": {
-    "status": {
-      "path": "/_v/status/:code",
+    "ordersByStatus": {
+      "path": "/_v/order_monitor/:status",
+      "public": true
+    },
+    "totalOrdersByStatus": {
+      "path": "/_v/order_monitor/totalOrders/:status",
+      "public": true
+    },
+    "notificationByStatus": {
+      "path": "/_v/order_monitor/getNotification/:status",
+      "public": true
+    },
+    "setNotification": {
+      "path": "/_v/order_monitor/setNotification/:status",
       "public": true
     }
   }
