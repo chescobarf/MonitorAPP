@@ -6,3 +6,44 @@ body,
 .render-provider {
   height: 100%;
 }
+.statusContainer{
+  width: fit-content;
+}
+.statusCard{
+  padding: '80px';
+  color: '#585959';
+  background: '#fafafa';
+}
+.statusTitle{
+  	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.statusNumbers{
+  text-align: center;
+}
+.statusEmails .container{
+	margin-top: 0.67em;
+	margin-bottom: 0.8em;
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	max-width: 100%;
+}
+.emailsTag{
+	margin: 0 7px 7px 0px;
+}
+.statusNotificate{
+	margin-top: 0.67em;
+    margin-bottom: 2em;
+}
+.statusNotificate .container{
+	display: flex;
+    justify-content: space-between;
+}
+.gridOrders{
+  display: grid;
+  width: auto;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem;
+}

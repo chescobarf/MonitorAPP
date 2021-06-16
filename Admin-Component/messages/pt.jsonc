@@ -1,7 +1,7 @@
+//TODO: Translate into pPortuguese
 {
   "order-monitor.navigation.label-group": "Monitor de órdenes",
   "order-monitor.navigation.search.kws": "order, monitor, ordenes",
   "order-monitor.hello-world": "Monitor de Órdenes",
-  "order-monitor.notification-actually": "Actualmente tienes la notificacion en:",
-  "order-monitor.orders": " Órdenes"
+  "order-monitor.notification-actually": "Actualmente tienes la notificacion en:"
 }

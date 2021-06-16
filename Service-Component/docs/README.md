@@ -125,3 +125,49 @@ We have an (for now, VTEX-only, internal) Splunk dashboard to show all metrics r
 After linking this app and making some requests, you can select `vtex.service-example` and see the metrics for your app. **Don't forget to check the box Development, as you are linking your app in a development workspace**.
 
 For convenience, the link for the current version: https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics?form.time.earliest=-30m%40m&form.time.latest=%40m&form.picked_context=false&form.picked_region=aws-us-east-*&form.picked_service=vtex.service-example
+
+<!-- TODO: We should update all this to english.-->
+# Middlewares
+
+## Orders
+
+orders.ts --> Entrega todas las ordenes por status enviado por url:
+
+### Ruta tipo
+
+TIPO:
+
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/{status}
+
+EJEMPLO
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/ready-for-handling
+
+## Total Orders
+
+totalOrders.ts --> Entrega el total de ordenes por status enviado por la url:
+
+### Ruta tipo
+
+TIPO:
+
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/totalOrders/{status}
+
+EJEMPLO
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/totalOrders/ready-for-handling
+
+## Notifications
+
+notifications.ts --> Entrega las notificaciones configuradas en Master Data (de manera manual), en la entity: OrderMonitor con acronym OM
+
+⚠️ Se deben crear fields para cada notification, con el mismo nombre de los status sin guiones ⚠️
+### Ruta tipo
+
+TIPO:
+
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/getNotification/{status}
+
+EJEMPLO
+- https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/getNotification/payment-approved
+
+
+
