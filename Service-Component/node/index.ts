@@ -6,7 +6,7 @@ import { Clients } from './clients'
 import { orders } from './middlewares/orders'
 import { totalOrders } from './middlewares/totalOrders'
 import { notifications } from './middlewares/notifications'
-import { notificationPost } from './middlewares/notificationPost'
+import { notificationPatch } from './middlewares/notificationPatch'
 
 const TIMEOUT_MS = 800
 
@@ -61,7 +61,7 @@ export default new Service({
       GET:[notifications]
     }),
     setNotification:method({
-      POST:[notificationPost]
+      PATCH:[notificationPatch]
     })
   },
 })

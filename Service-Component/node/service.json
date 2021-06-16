@@ -19,7 +19,7 @@
       "public": true
     },
     "setNotification": {
-      "path": "/_v/order_monitor/setNotification/:status",
+      "path": "/_v/order_monitor/setNotification/:status/:number",
       "public": true
     }
   }
