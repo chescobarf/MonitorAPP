@@ -24,13 +24,11 @@ const searchID = await http.get(
 const idEntity=searchID.data[0].id;
 const estado = status.toString().replace("-","");
 
-const bodyJson =`{
-  "${estado}": ${number}
-}`
+const bodyJson = JSON.stringify({ [estado]:number });
+
 //Hacemos el Patch a MD para actualizar los el numero de notificaciones para el status
 const data = await http.patch(
-  `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}`,
-  bodyJson
+  `https://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}`,bodyJson
 )
 
 const response=data

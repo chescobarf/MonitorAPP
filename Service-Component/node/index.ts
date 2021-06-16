@@ -61,7 +61,7 @@ export default new Service({
       GET:[notifications]
     }),
     setNotification:method({
-      PATCH:[notificationPatch]
+      GET:[notificationPatch]
     })
   },
 })

@@ -126,7 +126,7 @@ After linking this app and making some requests, you can select `vtex.service-ex
 
 For convenience, the link for the current version: https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics?form.time.earliest=-30m%40m&form.time.latest=%40m&form.picked_context=false&form.picked_region=aws-us-east-*&form.picked_service=vtex.service-example
 
-
+<!-- TODO: We should update all this to english.-->
 # Middlewares
 
 ## Orders

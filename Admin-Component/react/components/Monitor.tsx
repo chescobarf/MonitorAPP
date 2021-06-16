@@ -12,6 +12,8 @@ function Monitor ({estado}:AppProps) {
   const [status, setStatus] =useState("");
    const[notification,setNotification]=useState()
 
+
+  //TODO
 	const handleSubmit = (e:SyntheticEvent) =>{
 		e.preventDefault();
 		console.log("Click desde Formulario")
@@ -133,9 +135,6 @@ if(isLoad){
 					<Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={()=>removeEmail(email.name)}>{email.name}</Tag>	
 				))}
 			</div>
-	  		{/* <div className="statusEmails container">
-			  <Tag  className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => console.log('callback')}>christian.escobar@vtex.com.br</Tag>
-			</div> */}
         </div>
       </Card>
       </div>
@@ -177,9 +176,6 @@ if(isLoad){
             <Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={()=>removeEmail(email.name)}>{email.name}</Tag>	
          ))}
       </div>
-        {/* <div className="statusEmails container">
-        <Tag  className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => console.log('callback')}>christian.escobar@vtex.com.br</Tag>
-      </div> */}
      </div>
    </Card>
    </div>
