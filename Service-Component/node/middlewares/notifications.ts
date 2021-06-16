@@ -20,7 +20,7 @@ const searchID = await http.get(
   `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/search`
 )
 const idEntity=searchID.data[0].id;
-const estado = status.toString().replace("-","");
+const estado = status.toString().replace(/-/g, "");
 //Hacemos la consulta a MD que nos entregue el numero de notificaciones seteado para este status
 const {data} = await http.get(
   `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=${estado}`
