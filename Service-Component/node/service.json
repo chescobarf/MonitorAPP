@@ -21,6 +21,10 @@
     "setNotification": {
       "path": "/_v/order_monitor/setNotification/:status/:number",
       "public": true
+    },
+    "emailsByStatus": {
+      "path": "/_v/order_monitor/getEmails/:status",
+      "public": true
     }
   }
 }
