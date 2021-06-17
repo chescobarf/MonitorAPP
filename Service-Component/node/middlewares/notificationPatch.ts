@@ -6,7 +6,9 @@ export async function notificationPatch(ctx: Context, next: () => Promise<any>) 
  //Status es sacado desde el mismo context y saca el parametro enviado "number" por la URL
   const  number = ctx.vtex.route.params.number
 
-const key = ctx.vtex.adminUserAuthToken
+ const key= ctx.vtex.adminUserAuthToken
+
+//const key=ctx.get("VtexIdclientAutCookie")
 
 const http=axios.create({
   headers:{
