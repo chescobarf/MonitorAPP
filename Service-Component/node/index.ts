@@ -8,6 +8,8 @@ import { totalOrders } from './middlewares/totalOrders'
 import { notifications } from './middlewares/notifications'
 import { notificationPatch } from './middlewares/notificationPatch'
 import { emails } from './middlewares/emails'
+import { emailsPatch } from './middlewares/emailsPatch'
+
 
 const TIMEOUT_MS = 800
 
@@ -62,10 +64,13 @@ export default new Service({
       GET:[notifications]
     }),
     setNotification:method({
-      GET:[notificationPatch]
+      PATCH:[notificationPatch]
     }),
     emailsByStatus:method({
       GET:[emails]
+    }),
+    setEmails:method({
+      PATCH:[emailsPatch]
     }),
   },
 })

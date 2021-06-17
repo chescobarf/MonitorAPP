@@ -25,6 +25,10 @@
     "emailsByStatus": {
       "path": "/_v/order_monitor/getEmails/:status",
       "public": true
+    },
+    "setEmails": {
+      "path": "/_v/order_monitor/setEmails/:status/:emails",
+      "public": true
     }
   }
 }
