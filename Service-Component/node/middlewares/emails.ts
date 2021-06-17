@@ -23,12 +23,15 @@ const idEntity=searchID.data[0].id;
 const estado = status.toString().replace(/-/g, "");
 //Hacemos la consulta a MD que nos entregue el numero de notificaciones seteado para este status
 const {data} = await http.get(
-  `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=${estado}`
+  `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=emails${estado}`
 )
-//Tratamiento para traer solo el valor sin necesidad de conocer el key, dado que sera variable
-var dato=Object.values(data)
-//Tratamiento del response para que su key sea notificaction y nos entregue el dato
-const response={notification:dato[0]}
+const test = JSON.stringify(data)
+
+var rex = /["]+/;
+var test1=test.split(rex)
+var rex2= /[,]+/;
+var test2=test1[3].split(rex2)
+const response=test2
 ctx.status=200
 ctx.body=response
 ctx.set('Cache-Control','no-cache')
