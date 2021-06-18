@@ -1,6 +1,6 @@
 import React, { ChangeEvent, SyntheticEvent, useState, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Toggle, Divider, Card, InputButton, Tag } from 'vtex.styleguide'
+import { Toggle, Divider, Card, InputButton, Tag, Spinner } from 'vtex.styleguide'
 import { emailsTestArray } from '../constants'
 import { fetchTotalOrders, fetchTotalNotification } from '../services'
 
@@ -9,7 +9,6 @@ type AppProps = {
 }
 function Monitor({ orderState }: AppProps) {
   const [toggle, setToggle] = useState(true);
-  const [isLoading, setLoading] = useState(false);
   const [currentOrderCount, setCurrentOrderCount] = useState<number>();
   const [notificationTime, setNotificationTime] = useState<number>()
 
@@ -29,11 +28,9 @@ function Monitor({ orderState }: AppProps) {
 
   useEffect(() => {
     if (!currentOrderCount || !notificationTime) {
-      setLoading(true);
       getOrderCount();
       getNotificationCount();
     }
-    return setLoading(false)
   }, [orderState]);
 
   const getOrderCount = async () => {
@@ -46,91 +43,51 @@ function Monitor({ orderState }: AppProps) {
     setNotificationTime(response?.notification)
   }
 
-
-
-  if (!isLoading) {
-    return (
-      <div className="statusContainer">
-        <Card className="statusCard">
-          <div className="statusTitle">
-            <h2>{orderState}</h2>
-            <Toggle
-              semantic
-              checked={toggle}
-              onChange={() => setToggle(!toggle)}
-            />
-          </div>
-          <Divider orientation="horizontal" />
+  return (
+    <div className="statusContainer">
+      <Card className="statusCard">
+        <div className="statusTitle">
+          <h2>{orderState}</h2>
+          <Toggle
+            semantic
+            checked={toggle}
+            onChange={() => setToggle(!toggle)}
+          />
+        </div>
+        <Divider orientation="horizontal" />
           <div className="statusNumbers">
-            <h1 >{currentOrderCount}</h1>
+            <h1 >{currentOrderCount ?? <Spinner color="#134CD8" size={25} />}</h1>
             <h3>Orders</h3>
           </div>
-          <Divider orientation="horizontal" />
-          <div className="statusNotificate">
-            <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" />
-            <div className="statusNotificate container">
-              {<FormattedMessage id="order-monitor.current-notification" />}
-              <Tag className="emailsTag" type="warning">
-                {notificationTime}
-                {<FormattedMessage id="order-monitor.orders" />}
-              </Tag>
-            </div>
+        <Divider orientation="horizontal" />
+        <div className="statusNotificate">
+          <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" />
+          <div className="statusNotificate container">
+            {<FormattedMessage id="order-monitor.current-notification" />}
+            {!notificationTime ? (
+                <Spinner color="#134CD8" size={25} />
+              ) : (
+                <Tag className="emailsTag" type="warning">
+                  {notificationTime}
+                  {<FormattedMessage id="order-monitor.orders" />}
+                </Tag>
+              )
+            }
           </div>
-          <div className="statusEmails">
-            <form onSubmit={handleSubmit}>
-              <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" onChange={handleOnChange} />
-            </form>
-            <div className="statusEmails container">
-              {emailsTestArray.map((email, i) => (
-                <Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => removeEmail(email.name)}>{email.name}</Tag>
-              ))}
-            </div>
+        </div>
+        <div className="statusEmails">
+          <form onSubmit={handleSubmit}>
+            <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" onChange={handleOnChange} />
+          </form>
+          <div className="statusEmails container">
+            {emailsTestArray.map((email, i) => (
+              <Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => removeEmail(email.name)}>{email.name}</Tag>
+            ))}
           </div>
-        </Card>
-      </div>
-    )
-  } else {
-    return (
-      <div className="statusContainer">
-        <Card className="statusCard">
-          <div className="statusTitle">
-            <h2>Payments Pending</h2>
-            <Toggle
-              semantic
-              checked={toggle}
-              onChange={() => setToggle(!toggle)}
-            />
-          </div>
-          <Divider orientation="horizontal" />
-          <div className="statusNumbers">
-            <h1 >Loading Orders</h1>
-            <h3>Orders</h3>
-          </div>
-          <Divider orientation="horizontal" />
-          <div className="statusNotificate">
-            <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" />
-            <div className="statusNotificate container">
-              {<FormattedMessage id="order-monitor.current-notification" />}
-              <Tag className="emailsTag" type="warning">
-                200
-                {<FormattedMessage id="order-monitor.orders" />}
-              </Tag>
-            </div>
-          </div>
-          <div className="statusEmails">
-            <form onSubmit={handleSubmit}>
-              <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" onChange={handleOnChange} />
-            </form>
-            <div className="statusEmails container">
-              {emailsTestArray.map((email, i) => (
-                <Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => removeEmail(email.name)}>{email.name}</Tag>
-              ))}
-            </div>
-          </div>
-        </Card>
-      </div>
-    );
-  }
+        </div>
+      </Card>
+    </div>
+  )
 }
 
 export default Monitor
