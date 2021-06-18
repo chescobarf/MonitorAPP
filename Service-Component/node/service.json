@@ -29,6 +29,10 @@
     "setEmails": {
       "path": "/_v/order_monitor/setEmails/:status/:emails",
       "public": true
+    },
+    "sendEmail": {
+      "path": "/_v/order_monitor/sendEmail",
+      "public": true
     }
   }
 }

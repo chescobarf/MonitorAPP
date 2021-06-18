@@ -9,9 +9,10 @@ import { notifications } from './middlewares/notifications'
 import { notificationPatch } from './middlewares/notificationPatch'
 import { emails } from './middlewares/emails'
 import { emailsPatch } from './middlewares/emailsPatch'
+import { sendEmail } from './middlewares/sendEmail'
 
 
-const TIMEOUT_MS = 800
+const TIMEOUT_MS = 10000
 
 // Create a LRU memory cache for the Status client.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
@@ -50,8 +51,6 @@ declare global {
 export default new Service({
   clients,
   routes: {
-    // `orders` is the route ID from service.json. It maps to an array of middlewares (or a single handler).
-
     // Rutas creadas primer nombre es como fue creado en service.json
     //seguido de :method y dentro del verbo HTTP, con su respectivo middleware a usar una vez llamada la ruta
     ordersByStatus:method({
@@ -72,5 +71,8 @@ export default new Service({
     setEmails:method({
       PATCH:[emailsPatch]
     }),
+    sendEmail:method({
+      POST: [sendEmail]
+    })
   },
 })
