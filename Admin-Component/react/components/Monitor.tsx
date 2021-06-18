@@ -1,8 +1,8 @@
 import React, { ChangeEvent, SyntheticEvent, useState, useEffect } from 'react'
-import axios from "axios"
 import { FormattedMessage } from 'react-intl'
 import { Toggle, Divider, Card, InputButton, Tag } from 'vtex.styleguide'
-import { emailsTestArray, baseURL } from '../constants'
+import { emailsTestArray } from '../constants'
+import { fetchTotalOrders, fetchTotalNotification } from '../services'
 
 type AppProps = {
   orderState: string;
@@ -10,9 +10,8 @@ type AppProps = {
 function Monitor({ orderState }: AppProps) {
   const [toggle, setToggle] = useState(true);
   const [isLoading, setLoading] = useState(false);
-  const [currentOrderState, setCurrentOrderState] = useState<number>();
+  const [currentOrderCount, setCurrentOrderCount] = useState<number>();
   const [notificationTime, setNotificationTime] = useState<number>()
-
 
   //TODO
   const handleSubmit = (e: SyntheticEvent) => {
@@ -28,72 +27,28 @@ function Monitor({ orderState }: AppProps) {
     console.log(email);
   }
 
-  // // Axios  get Data
-  const urlOrders = `${baseURL}totalOrders/${orderState}`
-  const urlNotification = `${baseURL}getNotification/${orderState}`
-
-  function fetchData() {
-    try {
-      axios
-        .get(urlOrders)
-        .then(function (response) {
-          // handle success
-          const data = response.data;
-          console.log(data);
-          const res = data.total;
-          console.log(res);
-          setLoading(true);
-          setCurrentOrderState(res);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          console.log("Axios working");
-        });
-    } catch (error) {
-      console.log("error", error);
-      setLoading(false);
-      // appropriately handle the error
-    }
-  }
-  function fetchNotification() {
-    try {
-      axios
-        .get(urlNotification)
-        .then(function (response) {
-          // handle success
-          const data = response.data;
-          console.log(data);
-          const res = data.notification;
-          console.log(res);
-          setLoading(true);
-          setNotificationTime(res);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          console.log("Axios working");
-        });
-    } catch (error) {
-      console.log("error", error);
-      setLoading(false);
-      // appropriately handle the error
-    }
-  }
-
   useEffect(() => {
-    fetchData();
-    fetchNotification();
-  }, []);
+    if (!currentOrderCount || !notificationTime) {
+      setLoading(true);
+      getOrderCount();
+      getNotificationCount();
+    }
+    return setLoading(false)
+  }, [orderState]);
+
+  const getOrderCount = async () => {
+    const response = await fetchTotalOrders(orderState);
+    setCurrentOrderCount(response?.total)
+  }
+
+  const getNotificationCount = async () => {
+    const response = await fetchTotalNotification(orderState);
+    setNotificationTime(response?.notification)
+  }
 
 
-  if (isLoading) {
+
+  if (!isLoading) {
     return (
       <div className="statusContainer">
         <Card className="statusCard">
@@ -107,7 +62,7 @@ function Monitor({ orderState }: AppProps) {
           </div>
           <Divider orientation="horizontal" />
           <div className="statusNumbers">
-            <h1 >{currentOrderState}</h1>
+            <h1 >{currentOrderCount}</h1>
             <h3>Orders</h3>
           </div>
           <Divider orientation="horizontal" />
