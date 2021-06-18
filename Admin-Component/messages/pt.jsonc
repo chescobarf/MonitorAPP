@@ -2,6 +2,6 @@
 {
   "order-monitor.navigation.label-group": "Monitor de órdenes",
   "order-monitor.navigation.search.kws": "order, monitor, ordenes",
-  "order-monitor.hello-world": "Monitor de Órdenes",
-  "order-monitor.notification-actually": "Actualmente tienes la notificacion en:"
+  "order-monitor.title": "Monitor de Órdenes",
+  "order-monitor.current-notification": "Actualmente tienes la notificacion en:"
 }

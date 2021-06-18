@@ -15,9 +15,9 @@ body,
   background: '#fafafa';
 }
 .statusTitle{
-  	display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .statusNumbers{
   text-align: center;
@@ -35,11 +35,11 @@ body,
 }
 .statusNotificate{
 	margin-top: 0.67em;
-    margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 .statusNotificate .container{
 	display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 .gridOrders{
   display: grid;

@@ -1,22 +1,18 @@
-import React, { ChangeEvent, FC, SyntheticEvent, useState, useEffect} from 'react'
-import axios from "axios"
+import React, { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Layout, PageHeader,Toggle,Divider,Card,InputButton,Tag} from 'vtex.styleguide'
-import './styles.global.css'
+import { Layout, PageHeader} from 'vtex.styleguide'
 import Monitor from "./components/Monitor"
-const OrderMonitor: FC = () => {
+import './styles.global.css'
+import { orderStates } from './constants'
 
+const OrderMonitor: FC = () => {
   return (
-    <Layout pageHeader={<PageHeader title={<FormattedMessage id="order-monitor.hello-world" />} />}>
+    <Layout pageHeader={<PageHeader title={<FormattedMessage id="order-monitor.title" />} />}>
       <div className="gridOrders">
-        <Monitor estado="payment-pending"/>
-        <Monitor estado="payment-approved"/>
-        <Monitor estado="window-to-cancel"/>
-        <Monitor estado="ready-for-handling"/>
+        {orderStates.map((state, i) => <Monitor key={i} orderState={state}/>)}
       </div>
     </Layout>
   )
-
 }
 
 export default OrderMonitor

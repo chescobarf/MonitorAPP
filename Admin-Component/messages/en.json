@@ -1,7 +1,7 @@
 {
   "order-monitor.navigation.label-group": "Order Monitor",
   "order-monitor.navigation.search.kws": "order, monitor,order monitor",
-  "order-monitor.hello-world": "Order Monitor",
-  "order-monitor.notification-actually": "You currently have the notification in:",
+  "order-monitor.title": "Order Monitor",
+  "order-monitor.current-notification": "You currently have the notification in:",
   "order-monitor.orders": " Orders"
 }
