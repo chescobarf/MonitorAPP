@@ -1,4 +1,5 @@
 import axios from "axios"
+import {regexEmails} from "../utils/index"
 export async function emails(ctx: Context, next: () => Promise<any>) {
 
 //Status es sacado desde el mismo context y saca el parametro enviado "status" por la URL
@@ -25,13 +26,7 @@ const estado = status.toString().replace(/-/g, "");
 const {data} = await http.get(
   `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=emails${estado}`
 )
-const test = JSON.stringify(data)
-
-var rex = /["]+/;
-var test1=test.split(rex)
-var rex2= /[,]+/;
-var test2=test1[3].split(rex2)
-const response=test2
+const response=regexEmails(data)
 ctx.status=200
 ctx.body=response
 ctx.set('Cache-Control','no-cache')
