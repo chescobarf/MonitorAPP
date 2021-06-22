@@ -37,3 +37,22 @@ export const updateTotalNotification = async (orderState: string, newNotificatio
     console.log("error", error);
   }
 }
+
+export const fetchTotalEmails = async (orderState: string) => {
+  try {
+    const response = await apiClient.get(`getEmails/${orderState}`);
+    const totalEmails = response.data
+    return totalEmails;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+export const updateTotalEmails = async (orderState: string, emailsList: any) => {
+  try {
+    const response = await apiClient.patch(`setEmails/${orderState}`, emailsList);
+    if (response.status === 200) return;
+  } catch (error) {
+    console.log("error", error);
+  }
+}

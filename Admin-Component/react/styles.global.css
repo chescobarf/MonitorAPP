@@ -7,7 +7,7 @@ body,
   height: 100%;
 }
 .statusContainer{
-  width: fit-content;
+  width: 100%;
 }
 .statusCard{
   padding: '80px';
@@ -26,12 +26,10 @@ body,
 	margin-top: 0.67em;
 	margin-bottom: 0.8em;
 	display: flex;
-	gap: 10px;
+  flex-wrap: wrap;
+  gap: 7px;
 	width: 100%;
 	max-width: 100%;
-}
-.emailsTag{
-	margin: 0 7px 7px 0px;
 }
 .statusNotificate{
 	margin-top: 0.67em;
@@ -44,6 +42,6 @@ body,
 .gridOrders{
   display: grid;
   width: auto;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 50%);
   gap: 0.5rem;
 }
