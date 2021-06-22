@@ -1,4 +1,4 @@
-import axios from "axios"
+import { axiosCreateHttp } from "../utils"
 export async function emailsPatch(ctx: Context, next: () => Promise<any>) {
 
 //Status es sacado desde el mismo context y saca el parametro enviado "status" por la URL
@@ -6,20 +6,8 @@ export async function emailsPatch(ctx: Context, next: () => Promise<any>) {
  //Status es sacado desde el mismo context y saca el parametro enviado "number" por la URL
   const  emails = ctx.vtex.route.params.emails
 
- const key= ctx.vtex.adminUserAuthToken
+  const http=axiosCreateHttp(ctx)
 
-//const key=ctx.get("VtexIdclientAutCookie")
-
-const http=axios.create({
-  headers:{
-    VtexIdclientAutCookie: key,
-    "REST-Range": `resources=0-1`,
-    "Cache-Control": "no-cache",
-    "X-Vtex-Use-Https": true,
-    "Content-Type": "application/json",
-    Accept: "application/json"
-  }
-})
 
 // Desde masterdata sacamos primero el ID de nuestro registro, con el acronimo que creamos el dataentity (ORDERMONITOR = OM)
 const searchID = await http.get(

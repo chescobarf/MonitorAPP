@@ -1,19 +1,11 @@
-import axios from "axios"
+import { axiosCreateHttp } from "../utils";
 export async function notifications(ctx: Context, next: () => Promise<any>) {
 
 //Status es sacado desde el mismo context y saca el parametro enviado "status" por la URL
  const  status = ctx.vtex.route.params.status
 
-const key = ctx.vtex.adminUserAuthToken
+ const http=axiosCreateHttp(ctx)
 
-const http=axios.create({
-  headers:{
-    VtexIdclientAutCookie: key,
-    "REST-Range": `resources=0-1`,
-    "Cache-Control": "no-cache",
-    "X-Vtex-Use-Https": true
-  }
-})
 
 // Desde masterdata sacamos primero el ID de nuestro registro, con el acronimo que creamos el dataentity (ORDERMONITOR = OM)
 const searchID = await http.get(
