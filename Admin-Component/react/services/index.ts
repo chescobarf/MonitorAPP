@@ -28,3 +28,12 @@ export const fetchTotalNotification = async (orderState: string) => {
     console.log("error", error);
   }
 }
+
+export const updateTotalNotification = async (orderState: string, newNotification: number) => {
+  try {
+    const response = await apiClient.patch(`setNotification/${orderState}/${newNotification}`);
+    if (response.status === 200) return;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
