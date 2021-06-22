@@ -1,3 +1,4 @@
+import axios from "axios";
 // Regex para usar en emails, reestructurando la respuesta que nos da la data (keys) y devolviendo los datos como un array.
 export const regexEmails:any = (data:any) =>
 {
@@ -11,4 +12,15 @@ export const regexEmails:any = (data:any) =>
     // Aqui obligamos a trabajar con el dato [3] del arreglo para quitarle las comas y eventualmente conseguir solamente el arreglo con los emails que necesitamos
     return emails
 }
-
+// Create Headers with Axios
+export const axiosCreateHttp:any = (ctx:Context) =>{
+    const key = ctx.vtex.adminUserAuthToken
+    return axios.create({
+        headers:{
+          VtexIdclientAutCookie: key,
+          "REST-Range": `resources=0-1`,
+          "Cache-Control": "no-cache",
+          "X-Vtex-Use-Https": true
+        }
+      })
+}
