@@ -1,7 +1,8 @@
 import axios from "axios";
 // Regex para usar en emails, reestructurando la respuesta que nos da la data (keys) y devolviendo los datos como un array.
-export const regexEmails:any = (data:any) =>
+export const regexEmails:any = (data:any,estado:string) =>
 {
+  if(data[`${estado}`]){
     const res = JSON.stringify(data)
     // Aqui llega el dato como un objeto
     var regex = /["]+/;
@@ -11,6 +12,9 @@ export const regexEmails:any = (data:any) =>
     var emails=array[3].split(regex) 
     // Aqui obligamos a trabajar con el dato [3] del arreglo para quitarle las comas y eventualmente conseguir solamente el arreglo con los emails que necesitamos
     return emails
+  }else{
+    return [ ]
+  }
 }
 // Create Headers with Axios
 export const axiosCreateHttp:any = (ctx:Context) =>{

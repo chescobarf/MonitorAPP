@@ -1,8 +1,6 @@
 import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
 import { LRUCache, method, Service } from '@vtex/api'
-
 import { Clients } from './clients'
-
 import { orders } from './middlewares/orders'
 import { totalOrders } from './middlewares/totalOrders'
 import { notifications } from './middlewares/notifications'
@@ -10,6 +8,9 @@ import { notificationPatch } from './middlewares/notificationPatch'
 import { emails } from './middlewares/emails'
 import { emailsPatch } from './middlewares/emailsPatch'
 import { sendEmail } from './middlewares/sendEmail'
+import { updateTime } from './middlewares/updateTime'
+import { setUpdateTime } from './middlewares/setUpdateTime'
+
 
 
 const TIMEOUT_MS = 10000
@@ -73,6 +74,12 @@ export default new Service({
     }),
     sendEmail:method({
       POST: [sendEmail]
+    }),
+    updateTime:method({
+      GET: [updateTime]
+    }),
+    setUpdateTime:method({
+      PATCH:[setUpdateTime]
     })
   },
 })

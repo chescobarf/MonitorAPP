@@ -27,11 +27,19 @@
       "public": true
     },
     "setEmails": {
-      "path": "/_v/order_monitor/setEmails/:status/:emails",
+      "path": "/_v/order_monitor/setEmails/:status",
       "public": true
     },
     "sendEmail": {
       "path": "/_v/order_monitor/sendEmail",
+      "public": true
+    },
+    "updateTime": {
+      "path": "/_v/order_monitor/updateTime",
+      "public": true
+    },
+    "setUpdateTime": {
+      "path": "/_v/order_monitor/setUpdateTime/:time",
       "public": true
     }
   }

@@ -12,11 +12,12 @@ const searchID = await http.get(
 )
 const idEntity=searchID.data[0].id;
 const estado = status.toString().replace(/-/g, "");
+const emailsEstado = "emails".concat(estado)
 //Hacemos la consulta a MD que nos entregue el numero de notificaciones seteado para este status
 const {data} = await http.get(
-  `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=emails${estado}`
+  `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}/?_fields=${emailsEstado}`
 )
-const response=regexEmails(data)
+const response=regexEmails(data,emailsEstado)
 ctx.status=200
 ctx.body=response
 ctx.set('Cache-Control','no-cache')

@@ -14,7 +14,7 @@ const searchID = await http.get(
   `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/search`
 )
 const idEntity=searchID.data[0].id;
-const estado = status.toString().replace("-","");
+const estado = status.toString().replace(/-/g,"");
 
 //Hacemos el Patch a MD para actualizar los el numero de notificaciones para el status
 const {data} = await http.patch(
