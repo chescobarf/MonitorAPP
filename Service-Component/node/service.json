@@ -3,8 +3,15 @@
   "ttl": 10,
   "timeout": 2,
   "minReplicas": 2,
-  "maxReplicas": 4,
-  "workers": 1,
+  "maxReplicas": 10,
+  "workers": 4,
+  "events": {
+    "updateMonitors": {
+      "keys": [
+        "send-event"
+      ]
+    }
+  },
   "routes": {
     "ordersByStatus": {
       "path": "/_v/order_monitor/:status",
@@ -40,6 +47,10 @@
     },
     "setUpdateTime": {
       "path": "/_v/order_monitor/setUpdateTime/:time",
+      "public": true
+    },
+    "start": {
+      "path": "/_v/order_monitor/start",
       "public": true
     }
   }
