@@ -29,7 +29,7 @@ const OrderMonitor: FC = () => {
       <PageHeader
         title={<FormattedMessage id="order-monitor.title" />}>
           <span className="headerDropdown">
-            <h3>Actualizar monitores cada: </h3>
+            <h3>{<FormattedMessage id="order-monitor.update-monitor" />}</h3>
             <Dropdown
               className="dropdown"
               variation="inline"
@@ -38,7 +38,7 @@ const OrderMonitor: FC = () => {
               value={reloadingSchedule}
               onChange={handleReload}
             />
-            <h3>minutos</h3>
+            <h3>{<FormattedMessage id="order-monitor.update-minutes" />}</h3>
           </span>
       </PageHeader>
     }>

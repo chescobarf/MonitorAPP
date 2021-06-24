@@ -3,5 +3,16 @@
   "order-monitor.navigation.search.kws": "order, monitor, ordenes",
   "order-monitor.title": "Monitor de Órdenes",
   "order-monitor.current-notification": "Actualmente tienes la notificacion en:",
-  "order-monitor.orders": " Órdenes"
+  "order-monitor.orders": " Órdenes",
+  "order-monitor.update-monitor": "Actualizar monitores cada: ",
+  "order-monitor.update-minutes": "minutos",
+  "order-monitor.update-mails-alert": "El correo que has ingresado ya existe",
+  "order-monitor.delete-mails-alert": "¿Estás seguro de querer eliminar el correo {mail}?",
+  "order-monitor.notification-validation-alert": "No puedes configurar un valor menor a 0",
+  "order-monitor.placeholder-emails": "Emails",
+  "order-monitor.label-notify": "Notificar en",
+  "order-monitor.label-emails": "Correos para notificar",
+  "order-monitor.label-orders": "Órdenes",
+  "order-monitor.button-notify": "Actualizar",
+  "order-monitor.button-emails": "Agregar"
 }

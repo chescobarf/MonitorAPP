@@ -1,5 +1,18 @@
 {
-  "order-monitor.navigation.label": "Example admin",
+  "order-monitor.navigation.label-group": "",
+  "order-monitor.navigation.search.kws": "",
   "order-monitor.title": "",
-  "appframe.navigation.example": ""
+  "order-monitor.current-notification": "",
+  "order-monitor.orders": "",
+  "order-monitor.update-monitor": "",
+  "order-monitor.update-minutes": "",
+  "order-monitor.update-mails-alert": "",
+  "order-monitor.delete-mails-alert": "",
+  "order-monitor.notification-validation-alert": "",
+  "order-monitor.placeholder-emails": "",
+  "order-monitor.label-notify": "",
+  "order-monitor.label-emails": "",
+  "order-monitor.label-orders": "",
+  "order-monitor.button-notify": "",
+  "order-monitor.button-emails": ""
 }

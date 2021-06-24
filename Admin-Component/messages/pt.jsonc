@@ -1,7 +1,18 @@
-//TODO: Translate into pPortuguese
 {
-  "order-monitor.navigation.label-group": "Monitor de órdenes",
-  "order-monitor.navigation.search.kws": "order, monitor, ordenes",
-  "order-monitor.title": "Monitor de Órdenes",
-  "order-monitor.current-notification": "Actualmente tienes la notificacion en:"
+  "order-monitor.navigation.label-group": "Monitor de pedidos",
+  "order-monitor.navigation.search.kws": "order, monitor, pedidos",
+  "order-monitor.title": "Monitor de pedidos",
+  "order-monitor.current-notification": "Atualmente, você tem a notificação em:",
+  "order-monitor.orders": " Pedidos",
+  "order-monitor.update-monitor": "Atualize os monitores a cada: ",
+  "order-monitor.update-minutes": "minutos",
+  "order-monitor.update-mails-alert": "O e-mail que você digitou já existe",
+  "order-monitor.delete-mails-alert": "Tem certeza de que deseja excluir o e-mail {mail}?",
+  "order-monitor.notification-validation-alert": "Você não pode inserir um valor menor que 0",
+  "order-monitor.placeholder-emails": "Emails",
+  "order-monitor.label-notify": "Notificar em",
+  "order-monitor.label-emails": "Emails para notificar",
+  "order-monitor.label-orders": "Pedidos",
+  "order-monitor.button-notify": "Atualizar",
+  "order-monitor.button-emails": "Adicionar"
 }

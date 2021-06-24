@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { injectIntl, InjectedIntl } from 'react-intl';
 import { componentReloadTime } from '../../constants';
 import { fetchTotalOrders, fetchTotalNotification, updateTotalNotification, fetchTotalEmails, updateTotalEmails } from '../../services'
 import { cleanEmptyEmail } from '../../utils';
 import MonitorCard from './MonitorCard'
 
-type AppProps = {
+interface AppProps {
   orderState: string;
+  intl: InjectedIntl;
 }
-function Monitor({ orderState }: AppProps) {
+function Monitor({ orderState, intl }: AppProps) {
   const [currentOrderCount, setCurrentOrderCount] = useState<number>(0);
   const [notificationTime, setNotificationTime] = useState<number>(0);
   const [emailList, setEmailList] = useState<string[]>([]);
@@ -53,7 +55,7 @@ function Monitor({ orderState }: AppProps) {
 
   const updateEmails = (newEmail: string) => {
     if (emailList.includes(newEmail)) {
-      return alert('El correo que has ingresado ya existe')
+      return alert(intl.formatMessage({id: "order-monitor.update-mails-alert"}))
     }
     const updatedEmails = cleanEmptyEmail(emailList)
     const emailsJson = {
@@ -64,7 +66,7 @@ function Monitor({ orderState }: AppProps) {
   }
 
   const deleteEmails = (emailToDelete: string) => {
-    const confirmAnswer = confirm(`¿Estás seguro de querer eliminar el correo ${emailToDelete}?`)
+    const confirmAnswer = confirm(intl.formatMessage({id: "order-monitor.delete-mails-alert"}, {mail: emailToDelete}))
     if (confirmAnswer) {
       const updatedEmails = emailList.filter(email => email !== emailToDelete)
       const cleanEmails = cleanEmptyEmail(updatedEmails)
@@ -85,4 +87,4 @@ function Monitor({ orderState }: AppProps) {
   )
 }
 
-export default Monitor
+export default injectIntl(Monitor)

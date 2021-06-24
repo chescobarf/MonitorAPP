@@ -1,9 +1,9 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import { Toggle, Divider, Card, InputButton, Tag, Spinner } from 'vtex.styleguide'
 import { cleanEmptyEmail } from '../../utils';
 
-type AppProps = {
+interface AppProps {
   orderState: string;
   currentOrderCount: number;
   notificationTime: number;
@@ -11,8 +11,9 @@ type AppProps = {
   emailsList: string[];
   updateEmailsCallback: Function;
   deleteEmailsCallback: Function;
+  intl: InjectedIntl;
 }
-function MonitorCard({ orderState, currentOrderCount, notificationTime, notificationsCallback, emailsList, updateEmailsCallback, deleteEmailsCallback }: AppProps) {
+function MonitorCard({ orderState, currentOrderCount, notificationTime, notificationsCallback, emailsList, updateEmailsCallback, deleteEmailsCallback, intl }: AppProps) {
   const [toggle, setToggle] = useState(true);
   const [notificationUpdate, setNotificationUpdate] = useState<any>()
   const [emailUpdate, setEmailUpdate] = useState<any>()
@@ -26,7 +27,7 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
   const handleNotifyUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     let newNotification = e.target.value
     if (parseInt(newNotification) < 1) {
-      return alert("No puedes ingresar un valor menor a 0")
+      return alert(intl.formatMessage({id: "order-monitor.notification-validation-alert"}))
     }
     setNotificationUpdate(parseInt(newNotification))
   }
@@ -59,19 +60,19 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
       <Divider orientation="horizontal" />
         <div className="statusNumbers">
           <h1 >{currentOrderCount ?? <Spinner color="#134CD8" size={25} />}</h1>
-          <h3>Orders</h3>
+          <h3>{intl.formatMessage({id: "order-monitor.label-orders"})}</h3>
         </div>
       <Divider orientation="horizontal" />
       <form onSubmit={handleNotificationSubmit}>
         <div className="statusNotificate">
-          <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" value={notificationUpdate} onChange={handleNotifyUpdate}/>
+          <InputButton placeholder={intl.formatMessage({id: "order-monitor.label-orders"})} size="regular" label={intl.formatMessage({id: "order-monitor.label-notify"})} button={intl.formatMessage({id: "order-monitor.button-notify"})} type="number" value={notificationUpdate} onChange={handleNotifyUpdate}/>
           <div className="statusNotificate container">
             {<FormattedMessage id="order-monitor.current-notification" />}
             {!notificationTime ? (
                 <Spinner color="#134CD8" size={25} />
               ) : (
                 <Tag className="emailsTag" type="warning">
-                  {notificationTime}
+                  {`${notificationTime} `}
                   {<FormattedMessage id="order-monitor.orders" />}
                 </Tag>
               )
@@ -81,7 +82,7 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
       </form>
       <form onSubmit={handleEmailsSubmit}>
         <div className="statusEmails">
-            <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" value={emailUpdate} onChange={handleEmailUpdate} />
+            <InputButton placeholder={intl.formatMessage({id: "order-monitor.placeholder-emails"})} size="regular" label={intl.formatMessage({id: "order-monitor.label-emails"})} button={intl.formatMessage({id: "order-monitor.button-emails"})} type="email" value={emailUpdate} onChange={handleEmailUpdate} />
           <div className="statusEmails container">
             {!emailsList ? (
               <Spinner color="#134CD8" size={25} />
@@ -95,4 +96,4 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
   )
 }
 
-export default MonitorCard
+export default injectIntl(MonitorCard)
