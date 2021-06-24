@@ -45,3 +45,11 @@ body,
   grid-template-columns: repeat(2, 50%);
   gap: 0.5rem;
 }
+.headerDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.headerDropdown .vtex-dropdown__button {
+  font-size: 1.5rem;
+}

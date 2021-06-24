@@ -56,3 +56,22 @@ export const updateTotalEmails = async (orderState: string, emailsList: any) => 
     console.log("error", error);
   }
 }
+
+export const fetchReloadTime = async () => {
+  try {
+    const response = await apiClient.get(`updateTime`);
+    const reloadTime = response.data
+    return reloadTime;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+export const updateReloadTime = async (reloadTime: number) => {
+  try {
+    const response = await apiClient.patch(`setUpdateTime/${reloadTime}`);
+    if (response.status === 200) return;
+  } catch (error) {
+    console.log("error", error);
+  }
+}

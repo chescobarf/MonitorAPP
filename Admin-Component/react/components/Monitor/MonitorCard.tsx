@@ -1,6 +1,7 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Toggle, Divider, Card, InputButton, Tag, Spinner } from 'vtex.styleguide'
+import { cleanEmptyEmail } from '../../utils';
 
 type AppProps = {
   orderState: string;
@@ -8,27 +9,32 @@ type AppProps = {
   notificationTime: number;
   notificationsCallback: Function;
   emailsList: string[];
-  emailsCallback: Function;
+  updateEmailsCallback: Function;
+  deleteEmailsCallback: Function;
 }
-function MonitorCard({ orderState, currentOrderCount, notificationTime, notificationsCallback, emailsList, emailsCallback }: AppProps) {
+function MonitorCard({ orderState, currentOrderCount, notificationTime, notificationsCallback, emailsList, updateEmailsCallback, deleteEmailsCallback }: AppProps) {
   const [toggle, setToggle] = useState(true);
-  const [notificationUpdate, setNotificationUpdate] = useState<number>(0)
-  const [emailUpdate, setEmailUpdate] = useState<string>('')
+  const [notificationUpdate, setNotificationUpdate] = useState<any>()
+  const [emailUpdate, setEmailUpdate] = useState<any>()
 
   const handleNotificationSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     notificationsCallback(notificationUpdate)
-    setNotificationUpdate(0)
+    setNotificationUpdate('')
   }
 
   const handleNotifyUpdate = (e: ChangeEvent<HTMLInputElement>) => {
     let newNotification = e.target.value
+    if (parseInt(newNotification) < 1) {
+      return alert("No puedes ingresar un valor menor a 0")
+    }
     setNotificationUpdate(parseInt(newNotification))
   }
 
   const handleEmailsSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    emailsCallback(emailUpdate)
+    updateEmailsCallback(emailUpdate)
+    setEmailUpdate('')
   }
 
   const handleEmailUpdate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,9 +42,8 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
     setEmailUpdate(newEmail)
   }
 
-  // Funcion para Eliminar email desde el listado de Tags
   const removeEmail = (email: string) => {
-    console.log(email);
+    deleteEmailsCallback(email)
   }
 
   return (
@@ -59,7 +64,7 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
       <Divider orientation="horizontal" />
       <form onSubmit={handleNotificationSubmit}>
         <div className="statusNotificate">
-          <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" onChange={handleNotifyUpdate}/>
+          <InputButton placeholder="Orders" size="regular" label="Notify in" button="Update" type="number" value={notificationUpdate} onChange={handleNotifyUpdate}/>
           <div className="statusNotificate container">
             {<FormattedMessage id="order-monitor.current-notification" />}
             {!notificationTime ? (
@@ -76,11 +81,11 @@ function MonitorCard({ orderState, currentOrderCount, notificationTime, notifica
       </form>
       <form onSubmit={handleEmailsSubmit}>
         <div className="statusEmails">
-            <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" onChange={handleEmailUpdate} />
+            <InputButton placeholder="Emails" size="regular" label="Emails to notify" button="Add" type="email" value={emailUpdate} onChange={handleEmailUpdate} />
           <div className="statusEmails container">
             {!emailsList ? (
               <Spinner color="#134CD8" size={25} />
-            ) : (emailsList.map((email, i) => (
+            ) : (cleanEmptyEmail(emailsList).map((email, i) => (
               <Tag key={i} className="emailsTag" bgColor="#134CD8" color="#ffffff" onClick={() => removeEmail(email)}>{email}</Tag>
             )))}
           </div>
