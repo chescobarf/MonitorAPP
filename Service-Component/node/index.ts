@@ -69,7 +69,7 @@ function update(){
     }
     updateMonitors(context)
     return createSendEvent(context)
-  },5000)
+  },60000)
 }
 
 update()
@@ -79,6 +79,7 @@ update()
 // Export a service that defines route handlers and client options.
 export default new Service({
   clients: {
+    implementation: Clients,
     options: {
       events: {
         exponentialTimeoutCoefficient: 2,
@@ -88,6 +89,13 @@ export default new Service({
         timeout: 3000,
         concurrency: 10,
       },
+      default: {
+        retries: 2,
+        timeout: 10000,
+      },
+      status:{
+        memoryCache
+      }
     },
   },
   events:{
