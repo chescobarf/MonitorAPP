@@ -4,7 +4,8 @@ import { Layout, PageHeader, Dropdown } from 'vtex.styleguide'
 import Monitor from "./components/Monitor"
 import './styles.global.css'
 import { orderStates, reloadTimes } from './constants'
-import { fetchReloadTime, updateReloadTime } from './services'
+import { fetchReloadTime, updateReloadTime, apiClient } from './services'
+import { baseURLTEST } from './constants/baseUrl'
 
 const OrderMonitor: FC = () => {
   const [reloadingSchedule, setReloadingSchedule] = useState<number>(0)
@@ -13,14 +14,17 @@ const OrderMonitor: FC = () => {
     getTimeToReload()
   }, [reloadingSchedule])
 
+  const baseUrl = baseURLTEST()
+  const api = apiClient(baseUrl)
+
   const getTimeToReload = async () => {
-    const response = await fetchReloadTime();
+    const response = await fetchReloadTime(api);
     setReloadingSchedule(response.updatetime)
   }
 
   const handleReload = async (e: ChangeEvent<HTMLInputElement>) => {
     const reloadInterval = parseInt(e.target.value);
-    await updateReloadTime(reloadInterval)
+    await updateReloadTime(reloadInterval, api)
     getTimeToReload()
   }
 
@@ -43,7 +47,7 @@ const OrderMonitor: FC = () => {
       </PageHeader>
     }>
       <div className="gridOrders">
-        {orderStates.map((state, i) => <Monitor key={i} orderState={state} />)}
+        {orderStates.map((state, i) => <Monitor key={i} orderState={state} api={api} />)}
       </div>
     </Layout>
   )

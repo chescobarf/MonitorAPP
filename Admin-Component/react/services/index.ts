@@ -1,7 +1,6 @@
 import axios from "axios"
-import { baseURL } from '../constants'
 
-const apiClient = axios.create({
+export const apiClient = (baseURL:any) => axios.create({
   baseURL: baseURL,
   responseType: 'json',
   headers: {
@@ -9,9 +8,9 @@ const apiClient = axios.create({
   }
 })
 
-export const fetchTotalOrders = async (orderState: string) => {
+export const fetchTotalOrders = async (orderState: string, api:any) => {
   try {
-    const response = await apiClient.get(`totalOrders/${orderState}`);
+    const response = await api.get(`totalOrders/${orderState}`);
     const totalOrders = response.data
     return totalOrders;
   } catch (error) {
@@ -19,9 +18,9 @@ export const fetchTotalOrders = async (orderState: string) => {
   }
 }
 
-export const fetchTotalNotification = async (orderState: string) => {
+export const fetchTotalNotification = async (orderState: string, api:any) => {
   try {
-    const response = await apiClient.get(`getNotification/${orderState}`);
+    const response = await api.get(`getNotification/${orderState}`);
     const totalNotification = response.data
     return totalNotification;
   } catch (error) {
@@ -29,18 +28,18 @@ export const fetchTotalNotification = async (orderState: string) => {
   }
 }
 
-export const updateTotalNotification = async (orderState: string, newNotification: number) => {
+export const updateTotalNotification = async (orderState: string, newNotification: number, api:any) => {
   try {
-    const response = await apiClient.patch(`setNotification/${orderState}/${newNotification}`);
+    const response = await api.patch(`setNotification/${orderState}/${newNotification}`);
     if (response.status === 200) return;
   } catch (error) {
     console.log("error", error);
   }
 }
 
-export const fetchTotalEmails = async (orderState: string) => {
+export const fetchTotalEmails = async (orderState: string, api:any) => {
   try {
-    const response = await apiClient.get(`getEmails/${orderState}`);
+    const response = await api.get(`getEmails/${orderState}`);
     const totalEmails = response.data
     return totalEmails;
   } catch (error) {
@@ -48,18 +47,18 @@ export const fetchTotalEmails = async (orderState: string) => {
   }
 }
 
-export const updateTotalEmails = async (orderState: string, emailsList: any) => {
+export const updateTotalEmails = async (orderState: string, emailsList: any, api:any) => {
   try {
-    const response = await apiClient.patch(`setEmails/${orderState}`, emailsList);
+    const response = await api.patch(`setEmails/${orderState}`, emailsList);
     if (response.status === 200) return;
   } catch (error) {
     console.log("error", error);
   }
 }
 
-export const fetchReloadTime = async () => {
+export const fetchReloadTime = async (api:any) => {
   try {
-    const response = await apiClient.get(`updateTime`);
+    const response = await api.get(`updateTime`);
     const reloadTime = response.data
     return reloadTime;
   } catch (error) {
@@ -67,9 +66,9 @@ export const fetchReloadTime = async () => {
   }
 }
 
-export const updateReloadTime = async (reloadTime: number) => {
+export const updateReloadTime = async (reloadTime: number, api:any) => {
   try {
-    const response = await apiClient.patch(`setUpdateTime/${reloadTime}`);
+    const response = await api.patch(`setUpdateTime/${reloadTime}`);
     if (response.status === 200) return;
   } catch (error) {
     console.log("error", error);

@@ -11,8 +11,6 @@ export const emailsTestArray = [
   { name: "lolo@gmail.com" }
 ]
 
-export const baseURL = "https://ordermonitor--christianescobar.myvtex.com/_v/order_monitor/"
-
 export const reloadTimes = [
   { value: 1, label: '1' },
   { value: 5, label: '5' },

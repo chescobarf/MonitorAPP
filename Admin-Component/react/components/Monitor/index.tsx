@@ -8,8 +8,9 @@ import MonitorCard from './MonitorCard'
 interface AppProps {
   orderState: string;
   intl: InjectedIntl;
+  api: any
 }
-function Monitor({ orderState, intl }: AppProps) {
+function Monitor({ orderState, intl, api }: AppProps) {
   const [currentOrderCount, setCurrentOrderCount] = useState<number>(0);
   const [notificationTime, setNotificationTime] = useState<number>(0);
   const [emailList, setEmailList] = useState<string[]>([]);
@@ -32,23 +33,23 @@ function Monitor({ orderState, intl }: AppProps) {
   }, [orderState, notificationTime]);
 
   const getOrderCount = async () => {
-    const response = await fetchTotalOrders(orderState);
+    const response = await fetchTotalOrders(orderState, api);
     setCurrentOrderCount(response?.total)
   }
 
   const getNotificationCount = async () => {
-    const response = await fetchTotalNotification(orderState);
+    const response = await fetchTotalNotification(orderState, api);
     setNotificationTime(response?.notification)
   }
 
   const getEmails = async () => {
-    const response = await fetchTotalEmails(orderState)
+    const response = await fetchTotalEmails(orderState, api)
     setEmailList(cleanEmptyEmail(response))
   }
 
   const updateNotifications = async (newNotification: number) => {
     if (notificationTime !== newNotification) {
-      await updateTotalNotification(orderState, newNotification)
+      await updateTotalNotification(orderState, newNotification, api)
       getNotificationCount()
     }
   }
@@ -61,7 +62,7 @@ function Monitor({ orderState, intl }: AppProps) {
     const emailsJson = {
       "emails": [...updatedEmails, newEmail]
     }
-    updateTotalEmails(orderState, emailsJson)
+    updateTotalEmails(orderState, emailsJson, api)
     setEmailList([...updatedEmails, newEmail])
   }
 
@@ -73,7 +74,7 @@ function Monitor({ orderState, intl }: AppProps) {
       const emailsJson = {
         "emails": [...cleanEmails]
       }
-      updateTotalEmails(orderState, emailsJson)
+      updateTotalEmails(orderState, emailsJson, api)
       setEmailList([...cleanEmails])
     } else {
       return
