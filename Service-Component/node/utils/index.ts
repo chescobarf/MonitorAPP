@@ -38,3 +38,8 @@ export const getCacheContext = () => {
 export function setCacheContext(ctx: any) {
   context = ctx
 }
+
+export function JsonToNumber(json:JSON){
+  var key=Object.values(json)
+  return key
+}
