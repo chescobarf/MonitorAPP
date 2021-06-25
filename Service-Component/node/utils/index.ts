@@ -28,6 +28,19 @@ export const axiosCreateHttp:any = (ctx:Context) =>{
         }
       })
 }
+export const axiosCreateHttpCookie:any = (ctx:Context) =>{
+  const key = ctx.vtex.adminUserAuthToken
+  return axios.create({
+      headers:{
+        "Cookie":"VtexIdclientAutCookie="+key,
+        "REST-Range": `resources=0-1`,
+        "Cache-Control": "no-cache",
+        "X-Vtex-Use-Https": true,
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      }
+    })
+}
 
 let context: any = null
 
@@ -42,4 +55,15 @@ export function setCacheContext(ctx: any) {
 export function JsonToNumber(json:JSON){
   var key=Object.values(json)
   return key
+}
+
+export async function getUpdateTime(ctx:any){
+  const http =axiosCreateHttpCookie(ctx)
+  var updateTime = await http.get(
+    `http://${ctx.vtex.workspace}--${ctx.vtex.account}.myvtex.com/_v/order_monitor/updateTime`
+  )
+  updateTime = updateTime?.data
+  var updateTimeNumber:any = Object.values(updateTime)
+  updateTimeNumber = updateTimeNumber[0]
+  return updateTimeNumber*60000
 }

@@ -12,7 +12,7 @@ import { updateTime } from './middlewares/updateTime'
 import { setUpdateTime } from './middlewares/setUpdateTime'
 import { updateMonitors } from './events/updateMonitors'
 import { createSendEvent } from './routes/notify'
-import {getCacheContext, setCacheContext} from './utils'
+import {getCacheContext, setCacheContext, getUpdateTime} from './utils'
 
 // const TIMEOUT_MS = 10000
 
@@ -57,22 +57,29 @@ declare global {
   }
 }
 
-
-//HERE CODE NEW
-
-function update(){
-  setInterval(function(){
+function getCache(){
+  var intervalGetCache = setInterval(function(){
     const context = getCacheContext()
-    if (!context) {
-      console.log('no context in memory')
-      return
+    if(!context){
+      return console.log("*** NO CONTEXT ***");
     }
-    updateMonitors(context)
-    return createSendEvent(context)
+      clearInterval(intervalGetCache)
+      update(context)
+      return
   },60000)
 }
 
-update()
+
+async function update(context:any){
+  const tiempo = await getUpdateTime(context)
+  console.log(tiempo);
+  setInterval(function(){
+    updateMonitors(context)
+    return createSendEvent(context)
+  },tiempo ?? 60000)
+}
+
+getCache()
 
 //TO HERE
 
