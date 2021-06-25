@@ -4,18 +4,22 @@ import { Layout, PageHeader, Dropdown } from 'vtex.styleguide'
 import Monitor from "./components/Monitor"
 import './styles.global.css'
 import { orderStates, reloadTimes } from './constants'
-import { fetchReloadTime, updateReloadTime, apiClient } from './services'
+import { fetchReloadTime, updateReloadTime, apiClient, startMonitoring } from './services'
 import { baseURLTEST } from './constants/baseUrl'
 
 const OrderMonitor: FC = () => {
   const [reloadingSchedule, setReloadingSchedule] = useState<number>(0)
 
+  const baseUrl = baseURLTEST()
+  const api = apiClient(baseUrl)
+
   useEffect(() => {
     getTimeToReload()
   }, [reloadingSchedule])
 
-  const baseUrl = baseURLTEST()
-  const api = apiClient(baseUrl)
+  useEffect(() => {
+    startMonitoring(api);
+  }, [])
 
   const getTimeToReload = async () => {
     const response = await fetchReloadTime(api);

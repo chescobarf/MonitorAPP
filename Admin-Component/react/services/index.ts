@@ -74,3 +74,12 @@ export const updateReloadTime = async (reloadTime: number, api:any) => {
     console.log("error", error);
   }
 }
+
+export const startMonitoring = async (api:any) => {
+  try {
+    const response = await api.get(`start`);
+    if (response.status === 200) return;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
