@@ -5,12 +5,6 @@ export const orderStates = [
   "ready-for-handling"
 ]
 
-export const emailsTestArray = [
-  { name: "juan@gmail.com" },
-  { name: "pepe@gmail.com" },
-  { name: "lolo@gmail.com" }
-]
-
 export const reloadTimes = [
   { value: 1, label: '1' },
   { value: 5, label: '5' },
