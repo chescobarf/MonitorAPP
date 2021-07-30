@@ -1,11 +1,9 @@
-// import { JsonToNumber } from '../utils'
- import axios from "axios";
- import {STATUS} from "../utils/status";
+import axios from "axios";
+import {STATUS} from "../utils/status";
 import { emailValidation } from "../utils/emailValidation";
 export async function updateMonitors(context?:any) {
   const ctx = context
-  const account = ctx.vtex.account
-  const workspace = ctx.vtex.workspace
+  const { account, workspace } = ctx.vtex
   const axiosCreateHttp:any = (ctx:Context) =>{
     return axios.create({
         headers:{

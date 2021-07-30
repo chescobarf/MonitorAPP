@@ -19,7 +19,6 @@ const searchID = await http.get(
 const idEntity=searchID.data[0].id;
 const estado = status.toString().replace(/-/g,"");
 const emailsEstado = "emails".concat(estado)
-console.log(emailsEstado);
 //Hacemos el Patch a MD para actualizar los el numero de notificaciones para el status
 await http.patch(
   `http://${ctx.vtex.account}.myvtex.com/api/dataentities/OM/documents/${idEntity}`,{[emailsEstado]:arrayEmails}
