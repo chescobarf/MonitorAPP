@@ -1,38 +1,24 @@
-import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
+import type { ServiceContext, RecorderState } from '@vtex/api'
 import { LRUCache, method, Service } from '@vtex/api'
-
 import { Clients } from './clients'
-
 import { orders } from './middlewares/orders'
 import { totalOrders } from './middlewares/totalOrders'
 import { notifications } from './middlewares/notifications'
 import { notificationPatch } from './middlewares/notificationPatch'
-
-const TIMEOUT_MS = 800
+import { emails } from './middlewares/emails'
+import { emailsPatch } from './middlewares/emailsPatch'
+import { sendEmail } from './middlewares/sendEmail'
+import { updateTime } from './middlewares/updateTime'
+import { setUpdateTime } from './middlewares/setUpdateTime'
+import { updateMonitors } from './events/updateMonitors'
+import { createSendEvent } from './routes/notify'
+import {getCacheContext, setCacheContext, getUpdateTime} from './utils'
 
 // Create a LRU memory cache for the Status client.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
 const memoryCache = new LRUCache<string, any>({ max: 5000 })
 
 metrics.trackCache('status', memoryCache)
-
-// This is the configuration for clients available in `ctx.clients`.
-const clients: ClientsConfig<Clients> = {
-  // We pass our custom implementation of the clients bag, containing the Status client.
-  implementation: Clients,
-  options: {
-    // All IO Clients will be initialized with these options, unless otherwise specified.
-    default: {
-      retries: 2,
-      timeout: TIMEOUT_MS,
-    },
-    // This key will be merged with the default options and add this cache to our Status client.
-    status: {
-      memoryCache,
-    },
-  },
-}
-
 declare global {
   // We declare a global Context type just to avoid re-writing ServiceContext<Clients, State> in every handler and resolver
   type Context = ServiceContext<Clients, State>
@@ -43,12 +29,56 @@ declare global {
   }
 }
 
+function getCache(){
+  var intervalGetCache = setInterval(function(){
+    const context = getCacheContext()
+    if(!context){
+      return console.log("*** NO CONTEXT ***");
+    }
+      clearInterval(intervalGetCache)
+      update(context)
+      return
+  },60000)
+}
+
+async function update(context:any){
+  const tiempo = await getUpdateTime(context)
+  console.log(tiempo);
+  setInterval(function(){
+    updateMonitors(context)
+    return createSendEvent(context)
+  },tiempo ?? 60000)
+}
+
+getCache()
+
+
 // Export a service that defines route handlers and client options.
 export default new Service({
-  clients,
+  clients: {
+    implementation: Clients,
+    options: {
+      events: {
+        exponentialTimeoutCoefficient: 2,
+        exponentialBackoffCoefficient: 2,
+        initialBackoffDelay: 50,
+        retries: 1,
+        timeout: 3000,
+        concurrency: 10,
+      },
+      default: {
+        retries: 2,
+        timeout: 10000,
+      },
+      status:{
+        memoryCache
+      }
+    },
+  },
+  events:{
+    updateMonitors,
+  },
   routes: {
-    // `orders` is the route ID from service.json. It maps to an array of middlewares (or a single handler).
-
     // Rutas creadas primer nombre es como fue creado en service.json
     //seguido de :method y dentro del verbo HTTP, con su respectivo middleware a usar una vez llamada la ruta
     ordersByStatus:method({
@@ -61,7 +91,28 @@ export default new Service({
       GET:[notifications]
     }),
     setNotification:method({
-      GET:[notificationPatch]
-    })
+      PATCH:[notificationPatch]
+    }),
+    emailsByStatus:method({
+      GET:[emails]
+    }),
+    setEmails:method({
+      PATCH:[emailsPatch]
+    }),
+    sendEmail:method({
+      POST: [sendEmail]
+    }),
+    updateTime:method({
+      GET: [updateTime]
+    }),
+    setUpdateTime:method({
+      PATCH:[setUpdateTime]
+    }),
+    start:(ctx:any)=>{
+      setCacheContext(ctx)
+      ctx.set('Cache-Control','no-cache')
+      ctx.status = 200
+      ctx.body='ok'
+    }
   },
 })

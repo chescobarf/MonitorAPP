@@ -3,8 +3,15 @@
   "ttl": 10,
   "timeout": 2,
   "minReplicas": 2,
-  "maxReplicas": 4,
-  "workers": 1,
+  "maxReplicas": 10,
+  "workers": 4,
+  "events": {
+    "updateMonitors": {
+      "keys": [
+        "send-event"
+      ]
+    }
+  },
   "routes": {
     "ordersByStatus": {
       "path": "/_v/order_monitor/:status",
@@ -20,6 +27,30 @@
     },
     "setNotification": {
       "path": "/_v/order_monitor/setNotification/:status/:number",
+      "public": true
+    },
+    "emailsByStatus": {
+      "path": "/_v/order_monitor/getEmails/:status",
+      "public": true
+    },
+    "setEmails": {
+      "path": "/_v/order_monitor/setEmails/:status",
+      "public": true
+    },
+    "sendEmail": {
+      "path": "/_v/order_monitor/sendEmail",
+      "public": true
+    },
+    "updateTime": {
+      "path": "/_v/order_monitor/updateTime",
+      "public": true
+    },
+    "setUpdateTime": {
+      "path": "/_v/order_monitor/setUpdateTime/:time",
+      "public": true
+    },
+    "start": {
+      "path": "/_v/order_monitor/start",
       "public": true
     }
   }

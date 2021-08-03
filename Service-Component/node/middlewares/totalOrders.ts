@@ -1,18 +1,10 @@
-import axios from "axios"
+import { axiosCreateHttp } from "../utils"
 export async function totalOrders(ctx: Context, next: () => Promise<any>) {
 
 //Status es sacado desde el mismo context y saca el parametro enviado "status" por la URL
-const  status = ctx.vtex.route.params.status
-const key = ctx.vtex.adminUserAuthToken
+const status = ctx.vtex.route.params.status
+const http=axiosCreateHttp(ctx)
 
-const http=axios.create({
-  headers:{
-    VtexIdclientAutCookie: key,
-    "REST-Range": `resources=0-1`,
-    "Cache-Control": "no-cache",
-    "X-Vtex-Use-Https": true
-  }
-})
 const {data} = await http.get(
   `http://${ctx.vtex.account}.myvtex.com/api/oms/pvt/orders?f_status=${status}`
 )

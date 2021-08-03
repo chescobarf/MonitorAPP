@@ -1,0 +1,10 @@
+{
+    "email": "email@vtex.com.br",
+    "template": "monitor-order",
+    "additionalFields": {
+        "name": "name",
+        "totalOrders": 999,
+        "ordersNotify": 990,
+        "status": "order-status"
+    }
+}
