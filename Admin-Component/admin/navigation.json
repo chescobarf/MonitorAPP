@@ -1,7 +1,6 @@
 {
   "section": "analytics",
   "titleId": "order-monitor.navigation.label-group",
-  "subSection": "example",
   "searchKeyWordsHelpers": "order-monitor.navigation.search.kws",
   "path": "/admin/order-monitor"
 }

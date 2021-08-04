@@ -7,7 +7,7 @@ body,
   height: 100%;
 }
 .statusContainer{
-  width: fit-content;
+  width: 100%;
 }
 .statusCard{
   padding: '80px';
@@ -15,9 +15,9 @@ body,
   background: '#fafafa';
 }
 .statusTitle{
-  	display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .statusNumbers{
   text-align: center;
@@ -26,24 +26,30 @@ body,
 	margin-top: 0.67em;
 	margin-bottom: 0.8em;
 	display: flex;
-	gap: 10px;
+  flex-wrap: wrap;
+  gap: 7px;
 	width: 100%;
 	max-width: 100%;
 }
-.emailsTag{
-	margin: 0 7px 7px 0px;
-}
 .statusNotificate{
 	margin-top: 0.67em;
-    margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 .statusNotificate .container{
 	display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 .gridOrders{
   display: grid;
   width: auto;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, 50%);
   gap: 0.5rem;
+}
+.headerDropdown {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.headerDropdown .vtex-dropdown__button {
+  font-size: 1.5rem;
 }
