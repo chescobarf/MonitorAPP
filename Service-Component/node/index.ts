@@ -12,7 +12,8 @@ import { updateTime } from './middlewares/updateTime'
 import { setUpdateTime } from './middlewares/setUpdateTime'
 import { updateMonitors } from './events/updateMonitors'
 import { createSendEvent } from './routes/notify'
-import {getCacheContext, setCacheContext, getUpdateTime} from './utils'
+import { getCacheContext, setCacheContext, getUpdateTime } from './utils'
+import { notification } from './middlewares/notification'
 
 // Create a LRU memory cache for the Status client.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
@@ -29,25 +30,25 @@ declare global {
   }
 }
 
-function getCache(){
-  var intervalGetCache = setInterval(function(){
+function getCache() {
+  var intervalGetCache = setInterval(function () {
     const context = getCacheContext()
-    if(!context){
+    if (!context) {
       return console.log("*** NO CONTEXT ***");
     }
-      clearInterval(intervalGetCache)
-      update(context)
-      return
-  },60000)
+    clearInterval(intervalGetCache)
+    update(context)
+    return
+  }, 60000)
 }
 
-async function update(context:any){
+async function update(context: any) {
   const tiempo = await getUpdateTime(context)
   console.log(tiempo);
-  setInterval(function(){
+  setInterval(function () {
     updateMonitors(context)
     return createSendEvent(context)
-  },tiempo ?? 60000)
+  }, tiempo ?? 60000)
 }
 
 getCache()
@@ -70,49 +71,49 @@ export default new Service({
         retries: 2,
         timeout: 10000,
       },
-      status:{
+      status: {
         memoryCache
       }
     },
   },
-  events:{
+  events: {
     updateMonitors,
   },
   routes: {
     // Rutas creadas primer nombre es como fue creado en service.json
     //seguido de :method y dentro del verbo HTTP, con su respectivo middleware a usar una vez llamada la ruta
-    ordersByStatus:method({
-      GET:[orders]
+    ordersByStatus: method({
+      GET: [orders, notification]
     }),
-    totalOrdersByStatus:method({
-      GET:[totalOrders]
+    totalOrdersByStatus: method({
+      GET: [totalOrders]
     }),
-    notificationByStatus:method({
-      GET:[notifications]
+    notificationByStatus: method({
+      GET: [notifications]
     }),
-    setNotification:method({
-      PATCH:[notificationPatch]
+    setNotification: method({
+      PATCH: [notificationPatch]
     }),
-    emailsByStatus:method({
-      GET:[emails]
+    emailsByStatus: method({
+      GET: [emails]
     }),
-    setEmails:method({
-      PATCH:[emailsPatch]
+    setEmails: method({
+      PATCH: [emailsPatch]
     }),
-    sendEmail:method({
+    sendEmail: method({
       POST: [sendEmail]
     }),
-    updateTime:method({
+    updateTime: method({
       GET: [updateTime]
     }),
-    setUpdateTime:method({
-      PATCH:[setUpdateTime]
+    setUpdateTime: method({
+      PATCH: [setUpdateTime]
     }),
-    start:(ctx:any)=>{
+    start: (ctx: any) => {
       setCacheContext(ctx)
-      ctx.set('Cache-Control','no-cache')
+      ctx.set('Cache-Control', 'no-cache')
       ctx.status = 200
-      ctx.body='ok'
+      ctx.body = 'ok'
     }
   },
 })
